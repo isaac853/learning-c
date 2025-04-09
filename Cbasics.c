@@ -64,7 +64,13 @@ int main() {
 
     printf("%d \n", i);
     
+  
   }
+
+
+  int array[] = {1,2,3,4,5,6,7,8,9,0};
+
+  printf("%d \n", array[0]);
 
   // these end the function file thing as far as i cant tell, returning a zero means the file ran without error
   return 0;
