@@ -1,6 +1,6 @@
 #include <stdio.h> //this is a header file library, i think they are like imports in python. this lets you run printf commantds
 #include <stdbool.h>// booleans
-
+#include <string.h>//string functions
 
 // everything goes into a function called main, 
 int main() { 
@@ -55,7 +55,7 @@ int main() {
     
     /*i=0 is run once before the first loop runs, to initially set i
       i<5 is checked every time before each loop, if true, the loop keeps going
-      i++ is run at the end of every loop
+      i++ is run at the end of every loop (increment i by 1)
     */
 
     if (i == 2){
@@ -71,6 +71,41 @@ int main() {
   int array[] = {1,2,3,4,5,6,7,8,9,0};
 
   printf("%d \n", array[0]);
+
+  int presetSizeArray[10];
+
+  presetSizeArray[2] = 2;
+
+  printf("%lu \n", sizeof(presetSizeArray)); // returbs 40 as ints take up 4 bits each, and the array has 10 int slots
+
+  int lengthOfArray = sizeof(presetSizeArray) / sizeof(presetSizeArray[2]); //you can get the length of the array by dividing the total size by the size of each unit, this is useful in for loops
+
+
+char yoskebroske[] = "wazzuh!";// c does not have strings as a data type, only arrays of characters like so
+
+
+printf("%s \n",yoskebroske);
+
+printf("%c \n",yoskebroske[2]);
+
+char otherString[] = "what is happening my \"dudes\""; // to use special characters without blowing up the universe, use a reverse bracket
+
+printf("%lu \n", strlen(yoskebroske));
+
+
+
+strcat(yoskebroske, otherString); //concatenates otherstring onto yoskebroske
+
+yoskebroske[1] = 'u'; // very important to use single quotes
+
+strcmp(yoskebroske, otherString); //compares two strings, if they are the same, returns a 0, does not otherwise
+
+strcpy(yoskebroske, otherString);//copies otherstring onto yoskebroske
+
+int anInt;
+scanf("%d", &anInt);// allows a user input
+
+
 
   // these end the function file thing as far as i cant tell, returning a zero means the file ran without error
   return 0;
