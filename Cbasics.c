@@ -88,7 +88,7 @@ printf("%s \n",yoskebroske);
 
 printf("%c \n",yoskebroske[2]);
 
-char otherString[] = "what is happening my \"dudes\""; // to use special characters without blowing up the universe, use a reverse bracket
+char otherString[] = "what is happening my \"dudes\""; // to use special characters without blowing up the universe, use a reverse slash
 
 printf("%lu \n", strlen(yoskebroske));
 
@@ -102,9 +102,20 @@ strcmp(yoskebroske, otherString); //compares two strings, if they are the same, 
 
 strcpy(yoskebroske, otherString);//copies otherstring onto yoskebroske
 
+char aChar;
 int anInt;
-scanf("%d", &anInt);// allows a user input
+scanf("%d %c", &anInt, &aChar);// allows a user input for a number followed by a characater
 
+char firstname[30];
+
+scanf("%s", &firstname); // can't be longer than 30 characters
+
+// & symbol is used to reference the location of a variable
+
+printf("%p \n", &aChar);//hex form of memory adress
+
+int randint = 45;
+int* ptr = &randint; // the * is called the dereference operator and is used to make a pointer variable
 
 
   // these end the function file thing as far as i cant tell, returning a zero means the file ran without error
