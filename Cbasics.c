@@ -1,6 +1,6 @@
-#include <stdio.h> //this is a header file library, i think they are like imports in python. this lets you run printf commantds
+//#include <stdio.h> //this is a header file library, i think they are like imports in python. this lets you run printf commantds
 #include <stdbool.h>// booleans
-#include <string.h>//string functions
+//#include <string.h>//string functions
 
 // everything goes into a function called main, 
 int main() { 
@@ -108,7 +108,7 @@ scanf("%d %c", &anInt, &aChar);// allows a user input for a number followed by a
 
 char firstname[30];
 
-scanf("%s", &firstname); // can't be longer than 30 characters
+scanf("%s", firstname); // can't be longer than 30 characters
 
 // & symbol is used to reference the location of a variable
 
