@@ -3,6 +3,48 @@
 #include <string.h>//string functions
 #include <stdlib.h>// allows memory allocation
 
+void nxm_output(double** matrix, int size_col, int size_row){  
+    
+    printf("\n│");
+
+    for(int i=0; i<size_row; i++){
+        for(int j=0; j<size_col; j++){
+            
+            if (matrix[i][j] < 0){
+                printf("%lf,",matrix[i][j]);
+            }
+
+            else{
+                printf(" %lf,",matrix[i][j]);
+            }
+
+            if(j != 0){
+                if (j%(size_row-1) ==0 && i != size_row-1){
+                    printf("│\n│");
+                }
+
+                if(j%(size_row-1) ==0 && i == size_row-1){
+                    printf("│\n");
+                }
+            
+            }   
+        }
+    }
+    
+
+}
+
+void memoryfree_nxm(double** matrix, int size_row){ 
+    // i do not know if this frees the original, or creates a copy then frees that copy TODO check with phillip 
+    
+    for(int i=0; i<size_row; i++){
+        free(matrix[i]);
+        }
+
+    free(matrix);
+
+}
+
 int size_n(){
     int size_col;
 
@@ -21,12 +63,11 @@ int size_m(){
     return size_row;
 }
 
-
 double** matrixmaker_nxm(int size_col, int size_row){
     int i, j;
 
 
-    double** matrix = malloc(sizeof(double *) * size_col); //ask what double** means
+    double** matrix = malloc(sizeof(double *) * size_col);
 
         for(i=0; i<size_row; i++){
                 matrix[i] = malloc(sizeof(double) * size_row);
@@ -36,45 +77,30 @@ double** matrixmaker_nxm(int size_col, int size_row){
     printf("\nplease enter matrix values:\n");                
     for(i=0; i<size_col; i++){
         for(j=0; j<size_row; j++){
-
-            scanf("%lf", &matrix[i][j]); //exception segmentation fault, for some reason size_row becomes 1077280768, 1074266112, 
-            printf("stored thing \n");
-
-        }
-   }
-
-
-
-    for(i=0; i<size_col; i++){
-        for(j=0; j<size_row; j++){
             
-            printf("%lf, ", matrix[i][j]);
+            printf("[%d][%d]\n", i, j);
+            scanf("%lf", &matrix[i][j]);
+            printf("value stored \n");
 
         }
    }
-
-
 
     return matrix;
 }
 
-
-
-
 double** matrixInverter_2x2(double** matrix){
-
-    // make a stagnant example matrix
-    // ask how to free memory
-    // ask for help with the whole not returning a double way
-    //smack him if he says 'well you shouldn't be doing it like that'
-   
-
     //create and define det_m
     // det_m = ad - bc 
     double det_m;
     det_m = (matrix[0][0] * matrix[1][1]) - (matrix[1][0] * matrix[0][1]);
-    printf("\n determinant: %lf \n",det_m);
+    printf("\ndeterminant: %lf \n",det_m);
 
+    if(det_m == 0){
+        printf("\nmatrix has no inverse\n");
+
+        return false;
+
+    }
 
     //create and define the inverted matrix
 
@@ -96,41 +122,27 @@ double** matrixInverter_2x2(double** matrix){
 
         }
     }
-    
-    
-    // free original matrix from memory(may be changed depending on how original matrix is used later)
-    
-    for(int i=0; i<2; i++){
-        free(matrix[i]);
-
-    }
-
-    free(matrix);
-
     return inverted_matrix;
 }
 
-
 int main(){
-
-    // make defining n and m their own functions then pass them into matrixmaker so they can be reused later
 
     int size_col = size_n();
     int size_row = size_m();
 
     double** matrix = matrixmaker_nxm(size_col, size_row);
+    
+    nxm_output(matrix, size_col, size_row);
+    
     double** inverted_matrix = matrixInverter_2x2(matrix);
     
-
-
-    for(int i=0; i<2; i++){
-        for(int j=0; j<2; j++){
-
-            printf("%lf, ",inverted_matrix[i][j]);
-        }
-
+    if(!inverted_matrix){
+        return 1;
     }
+    
+    memoryfree_nxm(matrix, size_row);
 
+    nxm_output(inverted_matrix, size_col, size_row);
 
     return 0;
 }
